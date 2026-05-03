@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Github, Linkedin, Menu, Twitter, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Container } from "@/components/container";
@@ -13,6 +13,24 @@ const navItems = [
   { href: "/notes", label: "Notes" },
   { href: "/blog", label: "Blog" }
 ];
+
+const socialLinks = [
+  {
+    href: "https://linkedin.com/in/rishiathanikar",
+    label: "LinkedIn",
+    Icon: Linkedin
+  },
+  {
+    href: "https://github.com/rishia",
+    label: "GitHub",
+    Icon: Github
+  },
+  {
+    href: "https://x.com/ARishi_",
+    label: "X (Twitter)",
+    Icon: Twitter
+  }
+] as const;
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -85,9 +103,26 @@ export function SiteHeader() {
             <X size={26} strokeWidth={2} aria-hidden="true" />
           </button>
         </div>
-        <nav aria-label="Primary navigation">
-          <ul className="site-nav-mobile-list">{navItems.map((item) => navLink(item))}</ul>
-        </nav>
+        <div className="site-header-drawer-nav-wrap">
+          <nav aria-label="Primary navigation">
+            <ul className="site-nav-mobile-list">{navItems.map((item) => navLink(item))}</ul>
+          </nav>
+        </div>
+        <div className="site-header-drawer-social" aria-label="Social profiles">
+          {socialLinks.map(({ href, label, Icon }) => (
+            <a
+              key={href}
+              href={href}
+              className="site-header-drawer-social-link"
+              aria-label={label}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobile}
+            >
+              <Icon size={22} strokeWidth={2} aria-hidden="true" />
+            </a>
+          ))}
+        </div>
       </div>
 
       <Container className={`site-header-inner ${isHome ? "is-home" : ""}`}>
