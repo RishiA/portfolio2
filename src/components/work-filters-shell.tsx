@@ -17,6 +17,9 @@ export interface WorkFiltersShellProps {
 }
 
 export function WorkFiltersShell(props: WorkFiltersShellProps) {
+  if (props.ui === "timeline" || props.ui === "filterless") {
+    return null;
+  }
   if (props.ui === "facets") {
     return <WorkFiltersFacets {...props} />;
   }

@@ -1,7 +1,14 @@
-export type WorkFiltersUi = "segments" | "facets" | "transitions";
+export type WorkFiltersUi = "segments" | "facets" | "transitions" | "timeline" | "filterless";
 
 export function parseWorkFiltersUi(value: string | undefined): WorkFiltersUi {
-  if (value === "facets" || value === "transitions") return value;
+  if (
+    value === "facets" ||
+    value === "transitions" ||
+    value === "timeline" ||
+    value === "filterless"
+  ) {
+    return value;
+  }
   return "segments";
 }
 
