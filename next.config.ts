@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   /** Hostnames (not full URLs) allowed to request `/_next/*` in dev; see `isCsrfOriginAllowed` in Next. */
-  allowedDevOrigins: ["127.0.0.1", "localhost"],
+  /** Include ::1 so IPv6 localhost still loads /_next CSS in dev. */
+  allowedDevOrigins: ["127.0.0.1", "localhost", "::1"],
   images: {
     remotePatterns: [
       {
