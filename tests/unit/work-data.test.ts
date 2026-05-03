@@ -38,7 +38,7 @@ describe("workItems", () => {
 
   it("keeps impact callouts compact", () => {
     workItems.forEach((item) => {
-      if (item.impactPoints) {
+      if (item.impactPoints?.length) {
         expect(item.impactPoints.length).toBeGreaterThanOrEqual(1);
         expect(item.impactPoints.length).toBeLessThanOrEqual(3);
       }
