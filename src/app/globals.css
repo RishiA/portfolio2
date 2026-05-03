@@ -167,8 +167,9 @@ h3 {
 
 .site-header {
   position: relative;
+  z-index: 200;
   border: 0;
-  background: transparent;
+  background: var(--bg);
 }
 
 .site-header-inner {
@@ -187,6 +188,114 @@ h3 {
   min-height: 1px;
 }
 
+.site-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.2rem;
+}
+
+.site-header-menu-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 140ms ease;
+}
+
+.site-header-menu-btn:hover {
+  color: var(--accent);
+}
+
+.site-header-menu-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.site-header-drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(0, 0, 0, 0.38);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.32s step-end;
+}
+
+.site-header-drawer-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s step-start;
+}
+
+.site-header-drawer {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 160;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  margin: 0;
+  padding: calc(4.25rem + env(safe-area-inset-top, 0px)) 1.35rem 2rem;
+  box-sizing: border-box;
+  background: var(--bg);
+  box-shadow: -8px 0 36px rgba(0, 0, 0, 0.12);
+  overflow: auto;
+  overscroll-behavior: contain;
+  transform: translate3d(100%, 0, 0);
+  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-header-drawer.is-open {
+  transform: translate3d(0, 0, 0);
+}
+
+.site-nav-mobile-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.site-nav-mobile-link {
+  display: block;
+  font-family: var(--font-head), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.14s ease;
+}
+
+.site-nav-mobile-list li:last-child .site-nav-mobile-link {
+  border-bottom: 0;
+}
+
+.site-nav-mobile-link:hover,
+.site-nav-mobile-link:focus-visible {
+  color: var(--accent);
+}
+
+.site-nav-mobile-link[aria-current="page"] {
+  color: var(--accent);
+}
+
 .brand {
   font-family: var(--font-head), Georgia, serif;
   font-weight: 600;
@@ -195,6 +304,11 @@ h3 {
 }
 
 .site-nav {
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav > ul {
   list-style: none;
   display: flex;
   justify-content: center;
@@ -940,6 +1054,85 @@ h3 {
   padding-bottom: 0;
 }
 
+/* Timeline (?ui=timeline): first role is visible on load; later entries reveal on scroll */
+.work-timeline--scroll {
+  --work-timeline-reveal-ms: 680ms;
+  --work-timeline-reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.work-timeline--scroll .work-timeline-item {
+  border-left: none;
+  padding-left: 1.45rem;
+}
+
+.work-timeline--scroll .work-timeline-item::before {
+  content: none;
+}
+
+.work-timeline--scroll .work-timeline-rail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  pointer-events: none;
+}
+
+.work-timeline--scroll .work-timeline-rail-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: var(--rule);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition-property: transform;
+  transition-duration: var(--work-timeline-reveal-ms);
+  transition-timing-function: var(--work-timeline-reveal-ease);
+}
+
+.work-timeline--scroll .work-timeline-item--lead .work-timeline-rail-fill,
+.work-timeline--scroll .work-timeline-item.is-revealed .work-timeline-rail-fill {
+  transform: scaleY(1);
+}
+
+.work-timeline--scroll .work-timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 0.42rem;
+  width: 0.52rem;
+  height: 0.52rem;
+  margin: 0;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translate3d(-50%, 0, 0) scale(0.88);
+  transition-property: opacity, transform;
+  transition-duration: var(--work-timeline-reveal-ms);
+  transition-timing-function: var(--work-timeline-reveal-ease);
+}
+
+.work-timeline--scroll .work-timeline-item--lead .work-timeline-dot,
+.work-timeline--scroll .work-timeline-item.is-revealed .work-timeline-dot {
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0) scale(1);
+}
+
+.work-timeline--scroll .work-timeline-item-body {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition-property: opacity, transform;
+  transition-duration: var(--work-timeline-reveal-ms);
+  transition-timing-function: var(--work-timeline-reveal-ease);
+}
+
+.work-timeline--scroll .work-timeline-item--lead .work-timeline-item-body,
+.work-timeline--scroll .work-timeline-item.is-revealed .work-timeline-item-body {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
 @keyframes intro-write {
   from {
     max-inline-size: 0;
@@ -950,9 +1143,13 @@ h3 {
 }
 
 @media (max-width: 960px) {
-  .site-header-inner {
-    grid-template-columns: 1fr auto;
+  .site-header-inner:not(.is-home) {
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
+  }
+
+  .site-header-inner.is-home {
+    grid-template-columns: 1fr auto;
   }
 
   .site-header-spacer {
@@ -963,10 +1160,25 @@ h3 {
     display: block;
   }
 
-  .site-nav {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-    gap: 0.8rem;
+  .site-nav--desktop {
+    display: none !important;
+  }
+
+  .site-header-menu-btn {
+    display: inline-flex;
+  }
+
+  .site-header-drawer-backdrop,
+  .site-header-drawer {
+    display: block;
+  }
+
+  .site-header-drawer-backdrop:not(.is-open) {
+    pointer-events: none;
+  }
+
+  .site-header-drawer:not(.is-open) {
+    pointer-events: none;
   }
 
   .grid.cols-2,
@@ -993,5 +1205,19 @@ h3 {
   .home-intro {
     animation: none !important;
     max-inline-size: 100% !important;
+  }
+
+  .work-timeline--scroll .work-timeline-item[data-timeline-follow] .work-timeline-rail-fill {
+    transform: scaleY(1);
+  }
+
+  .work-timeline--scroll .work-timeline-item[data-timeline-follow] .work-timeline-dot {
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0) scale(1);
+  }
+
+  .work-timeline--scroll .work-timeline-item[data-timeline-follow] .work-timeline-item-body {
+    opacity: 1;
+    transform: none;
   }
 }
