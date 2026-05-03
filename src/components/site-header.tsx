@@ -59,6 +59,37 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
+      {/* Backdrop + drawer first so the bar (Container, last child) stacks above fixed layers reliably */}
+      <div
+        className={`site-header-drawer-backdrop ${mobileOpen ? "is-open" : ""}`}
+        aria-hidden="true"
+        onClick={closeMobile}
+      />
+
+      <div
+        id={menuPanelId}
+        className={`site-header-drawer ${mobileOpen ? "is-open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        aria-hidden={!mobileOpen}
+        inert={!mobileOpen ? true : undefined}
+      >
+        <div className="site-header-drawer-top">
+          <button
+            type="button"
+            className="site-header-drawer-close"
+            aria-label="Close menu"
+            onClick={closeMobile}
+          >
+            <X size={26} strokeWidth={2} aria-hidden="true" />
+          </button>
+        </div>
+        <nav aria-label="Primary navigation">
+          <ul className="site-nav-mobile-list">{navItems.map((item) => navLink(item))}</ul>
+        </nav>
+      </div>
+
       <Container className={`site-header-inner ${isHome ? "is-home" : ""}`}>
         {isHome ? (
           <div className="site-header-spacer" aria-hidden="true" />
@@ -99,36 +130,6 @@ export function SiteHeader() {
           </button>
         </div>
       </Container>
-
-      <div
-        className={`site-header-drawer-backdrop ${mobileOpen ? "is-open" : ""}`}
-        aria-hidden="true"
-        onClick={closeMobile}
-      />
-
-      <div
-        id={menuPanelId}
-        className={`site-header-drawer ${mobileOpen ? "is-open" : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Site menu"
-        aria-hidden={!mobileOpen}
-        inert={!mobileOpen ? true : undefined}
-      >
-        <div className="site-header-drawer-top">
-          <button
-            type="button"
-            className="site-header-drawer-close"
-            aria-label="Close menu"
-            onClick={closeMobile}
-          >
-            <X size={26} strokeWidth={2} aria-hidden="true" />
-          </button>
-        </div>
-        <nav aria-label="Primary navigation">
-          <ul className="site-nav-mobile-list">{navItems.map((item) => navLink(item))}</ul>
-        </nav>
-      </div>
     </header>
   );
 }
