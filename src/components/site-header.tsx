@@ -115,6 +115,16 @@ export function SiteHeader() {
         aria-hidden={!mobileOpen}
         inert={!mobileOpen ? true : undefined}
       >
+        <div className="site-header-drawer-top">
+          <button
+            type="button"
+            className="site-header-drawer-close"
+            aria-label="Close menu"
+            onClick={closeMobile}
+          >
+            <X size={26} strokeWidth={2} aria-hidden="true" />
+          </button>
+        </div>
         <nav aria-label="Primary navigation">
           <ul className="site-nav-mobile-list">{navItems.map((item) => navLink(item))}</ul>
         </nav>
