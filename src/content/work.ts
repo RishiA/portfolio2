@@ -5,19 +5,20 @@ export const workItems: WorkItem[] = [
     slug: "rho",
     title: "Rho",
     organization: "Rho",
-    roleTitle: "Senior Product Manager",
-    role: "Senior Product Manager",
+    roleTitle: "Senior Product Manager, Banking & AI",
+    role: "Senior Product Manager, Banking & AI",
     period: "present",
     periodLabel: "Present",
     location: "New York, NY",
     summary:
-      "I own realtime payments and the data infrastructure underneath Rho's banking platform. Current focus: making financial data queryable and trustworthy enough that AI agents can rely on it the same way a CFO would.",
+      "Rho is building business banking for founders who'd rather run their company than their banking stack. I'm the banking and AI PM — which means two things: making the core banking experience as seamless as it should have always been, and building the intelligence layer on top so founders know what matters without having to do the analysis themselves.",
     highlights: [
-      "Building payment and treasury APIs for programmatic money movement, approval policies, and realtime reconciliation.",
-      "Designing AI-driven automations for invoice matching, vendor payments, and expense routing — auditable by default.",
-      "Defining the data platform layer that other product teams build on for reporting, controls, and integrations."
+      "Building proactive spend insights that surface what's financially significant — founders see what matters at a glance instead of digging through transaction data to find it.",
+      "Developing a public API and developer CLI so technical founders can build their own financial dashboards and automate money movement programmatically.",
+      "Owning the core banking experience: payment rails, international transfers, and transaction details — the features that feel invisible when they work and maddening when they don't.",
+      "Shipping production code alongside the product work: the internal tools and workflows I've built are used daily across product, design, finops, and GTM."
     ],
-    impactPoints: ["Early-stage role (started January 2026) — shipping in progress."],
+    impactPoints: ["Started January 2026 — early innings."],
     evidenceTags: ["self-report:rho", "site-copy:home-about"],
     toolsOrDomains: ["Banking infrastructure", "Payments", "Data platform", "AI"],
     artifacts: [],
@@ -35,18 +36,15 @@ export const workItems: WorkItem[] = [
     periodLabel: "2023-2025",
     location: "New York, NY",
     summary:
-      "I owned underwriting, compliance, and pricing. Shipped an ML model that automated 85% of manual underwriting reviews and a compliance system that files across 50 states with a 99%+ on-time rate.",
+      "Justworks is a PEO — they run payroll, benefits, and compliance for thousands of small businesses, which means they're also on the hook for all of their regulatory exposure. I owned the systems that decide which businesses to onboard, how to price them, and how to stay on the right side of 50 different state regulators.",
     highlights: [
-      "Shipped an ML underwriting model with human-in-the-loop review — 92% decision accuracy, 85% less manual effort.",
-      "Built risk-diversification logic across regulated entities and integrated KYB verification into onboarding.",
-      "Built compliance automation that files jurisdiction-specific regulatory responses across all 50 states — 99%+ on-time rate, ~90% less ops overhead.",
-      "Led internal AI adoption from prototype to production; launched justworks.com/llms.txt."
+      "Built an ML-powered underwriting model with human-in-the-loop review that automated 85% of manual decisions at 92% accuracy, enabling risk-based pricing while keeping human judgment on edge cases.",
+      "Designed risk diversification across multiple regulated entities, integrating Persona for KYB verification — the due diligence that confirms a business is real before you take on their regulatory exposure. Increased risk-adjusted margins by 8%.",
+      "Shipped compliance automation that retrieves structured regulatory data and auto-generates jurisdiction-specific filings across all 50 states. >99% on-time rate, ~90% less ops overhead.",
+      "Redesigned financial service infrastructure for tax rate calculation, risk-based premium pricing, and automated compliance workflows — unlocking $5M in new revenue.",
+      "Championed AI adoption org-wide: hands-on prototyping with Claude Code, training PMs on AI-assisted workflows, and launching justworks.com/llms.txt."
     ],
-    impactPoints: [
-      "92% underwriting accuracy with 85% less manual review.",
-      ">99% compliance rate, ~90% less operational overhead.",
-      "$5M in new revenue from pricing and compliance platform upgrades."
-    ],
+    impactPoints: [],
     evidenceTags: ["resume:justworks", "work-page:justworks"],
     toolsOrDomains: ["Underwriting", "Compliance automation", "Pricing", "ML"],
     artifacts: [],
@@ -64,18 +62,14 @@ export const workItems: WorkItem[] = [
     periodLabel: "2021-2023",
     location: "New York, NY",
     summary:
-      "I led the migration of 92% of active accounts off a legacy BaaS provider — zero downtime, zero lost funds. Also shipped Reg E dispute workflows that cut resolution time from 14 days to 3.",
+      "Stash had a problem: their entire banking product ran on a third-party BaaS provider that was limiting what they could build and how fast they could move. I led the migration to an in-house platform — the kind of project where \"zero downtime\" and \"zero lost funds\" aren't aspirational goals, they're the only acceptable outcome.",
     highlights: [
-      "Migrated 92% of active accounts off a legacy BaaS provider to an in-house platform — zero downtime, zero lost funds.",
-      "Shipped in-app Reg E dispute workflows connected to ops tooling. Resolution time dropped from 14 days to 3.",
-      "Redesigned direct-deposit setup — monthly deposits up 7%, related support contacts down 95%.",
-      "Rebuilt onboarding and first-deposit flow. Conversion up 14%, average first deposit up 150%."
+      "Migrated 92% of active accounts off the legacy BaaS provider with zero service disruption and zero lost funds, coordinating across engineering, compliance, and operations.",
+      "Shipped Reg E-compliant dispute resolution — the federally mandated process for when a customer says \"that charge wasn't me.\" Built the in-app workflow and ops case integration. Resolution time dropped from 14 days to 3; dispute-related support calls dropped 60%.",
+      "Launched an optimized direct deposit solution that increased monthly platform deposits by 7% and reduced related support contacts by 95%.",
+      "Redesigned onboarding and first-deposit flow, reducing friction in funding source linking. Conversion up 14%, average first deposit up 150%."
     ],
-    impactPoints: [
-      "Dispute-related support calls dropped 60%; resolution time improved from 14 days to 3.",
-      "Monthly direct deposits increased 7%; related support contacts decreased 95%.",
-      "Onboarding conversion rose 14%; average first deposit increased 150% ($43)."
-    ],
+    impactPoints: [],
     evidenceTags: ["resume:stash", "work-page:stash"],
     toolsOrDomains: ["Banking migration", "Disputes", "Growth", "Payments"],
     artifacts: [],
@@ -93,16 +87,13 @@ export const workItems: WorkItem[] = [
     periodLabel: "2019-2021",
     location: "New York, NY",
     summary:
-      "I shipped Casper's retail POS system across 72 stores and led connected hardware prototypes through beta.",
+      "Casper was expanding from DTC darling to national retail chain, and their stores needed a checkout system that could keep up. I owned the retail POS rollout and led the company's first connected hardware product through beta.",
     highlights: [
-      "Rolled out a custom POS platform with Adyen across 72 retail stores, adopted by 450+ employees in the first week.",
-      "Integrated Affirm financing into in-store checkout, generating $4M in incremental revenue in 2020.",
-      "Led a connected hardware product through beta — hardware, firmware, and mobile app across separate engineering teams."
+      "Shipped a custom POS system with Adyen for payment processing across 72 stores — adopted by 450+ retail employees in the first week, which is about as good as enterprise POS rollouts get.",
+      "Integrated Affirm financing into in-store checkout, generating $4M in incremental retail revenue for 2020.",
+      "Led 0→1 development for a connected devices (IoT) product, managing hardware, firmware, and mobile app workstreams through successful beta."
     ],
-    impactPoints: [
-      "$4M in incremental retail revenue from in-store financing in 2020.",
-      "72-store POS rollout adopted by 450+ retail employees in week one."
-    ],
+    impactPoints: [],
     evidenceTags: ["resume:casper", "work-page:casper"],
     toolsOrDomains: ["Retail systems", "Payments", "Financing", "Hardware"],
     artifacts: [],
@@ -120,17 +111,13 @@ export const workItems: WorkItem[] = [
     periodLabel: "2017-2019",
     location: "San Francisco, CA",
     summary:
-      "I launched Peet's first mobile loyalty apps, rebuilt peets.com, and migrated 1.5M accounts to a unified identity platform.",
+      "Peet's had a loyal customer base but no mobile presence and an e-commerce platform that wasn't converting. I built their first mobile loyalty apps from scratch and rebuilt the web purchase funnel.",
     highlights: [
-      "Shipped iOS and Android loyalty apps from scratch — payments, ordering, rewards — reaching 300K monthly active users and $20M in mobile payment volume within three months.",
-      "Led the peets.com redesign across the purchase funnel and subscription flow, improving web conversion 12% and beating the annual subscription target by $800K.",
-      "Delivered an enterprise identity-platform migration to unify login across 1.5M user accounts."
+      "Delivered iOS and Android loyalty apps from 0→1 — payments, ordering, rewards — reaching 300K monthly active users and $20M in mobile payment volume within three months of launch.",
+      "Led the peets.com redesign across the purchase funnel and subscription flow. Conversion up 12%, monthly subscriptions up 10%, beating the annual revenue target by $800K.",
+      "Delivered an enterprise identity management platform migration, unifying login across 1.5M user accounts — the kind of project that sounds straightforward until you're three weeks in."
     ],
-    impactPoints: [
-      "300K MAU and $20M in mobile payment volume within three months of launch.",
-      "Web conversion up 12%; monthly subscriptions up 10%, beating annual target by $800K.",
-      "1.5M accounts migrated to a unified authentication experience."
-    ],
+    impactPoints: [],
     evidenceTags: ["resume:peets", "work-page:peets"],
     toolsOrDomains: ["Mobile apps", "E-commerce", "Subscriptions", "Identity"],
     artifacts: [],
@@ -148,17 +135,13 @@ export const workItems: WorkItem[] = [
     periodLabel: "2014-2016",
     location: "Seattle, WA",
     summary:
-      "I co-founded a marketplace that made it easy for independent roasters to discover and buy specialty green coffee in the quantities they actually needed.",
+      "Before I got into fintech, I co-founded a marketplace for specialty coffee. Beander connected major US green coffee importers with small-batch roasters who wanted access to great beans but couldn't meet the typical import minimums. We bootstrapped it, made it profitable, and exited in 2016.",
     highlights: [
-      "Built the product end-to-end: catalog, search, ordering mechanics, and the operational tooling to fulfill mixed-origin small-batch orders.",
+      "Built the product end-to-end: catalog, search, ordering, and the operational tooling to fulfill mixed-origin small-batch orders.",
       "Signed three major US green coffee importers, giving roasters access to over 150 varietals from 15 countries.",
-      "Onboarded 100+ small-batch roasters, bootstrapped to profitability, and exited in 2016."
+      "Onboarded 100+ small-batch roasters. Bootstrapped to profitability. This one taught me more about product than any job before or since."
     ],
-    impactPoints: [
-      "3 major importer partners, 150+ varietals from 15 countries.",
-      "100+ roasters onboarded.",
-      "Bootstrapped to profitability and exited in 2016."
-    ],
+    impactPoints: [],
     evidenceTags: ["resume:beander", "work-page:beander"],
     toolsOrDomains: ["Marketplace", "E-commerce", "Operations"],
     artifacts: [],
@@ -176,17 +159,14 @@ export const workItems: WorkItem[] = [
     periodLabel: "2011-2017",
     location: "Seattle, WA",
     summary:
-      "Six years shipping digital products for Microsoft, P&G, AT&T, and BECU — from campaign launches and CMS architecture to full-scale platform redesigns.",
+      "Six years of agency work, building digital products for companies that measure launch-day traffic in the millions. This is where I learned to ship — fast, under constraints, for stakeholders who have opinions.",
     highlights: [
-      "Led launch-track work for Microsoft's HoloLens campaign site and SDK signup experience, and shipped features on Xbox.com.",
-      "Redesigned BECU's digital banking experience, working within the regulatory and accessibility constraints of financial services.",
+      "Led launch-track work for Microsoft's HoloLens campaign and SDK signup experience; shipped features on Xbox.com.",
+      "Redesigned BECU's digital banking experience within the regulatory and accessibility constraints of financial services — my first taste of building in regulated industries.",
       "Architected CMS infrastructure and multi-market rollout programs for AT&T.",
-      "Built P&G's first brand Facebook page and grew it to over 10M followers; shipped consumer activation campaigns for J.M. Smucker and other CPG brands."
+      "Built P&G's first brand Facebook page, grew it to 10M+ followers, and shipped consumer campaigns for J.M. Smucker and other CPG brands."
     ],
-    impactPoints: [
-      "P&G brand page grew from launch to 10M+ followers.",
-      "Delivered multi-market releases across enterprise and consumer programs."
-    ],
+    impactPoints: [],
     evidenceTags: ["resume:wunderman", "work-page:wunderman-possible"],
     toolsOrDomains: ["Enterprise web", "Mobile", "CMS", "Consumer"],
     artifacts: [],

@@ -30,14 +30,15 @@ export default function HomePage() {
           </figure>
 
           <p className="home-blurb">
-            I&apos;m a product leader who&apos;s spent over a decade in complex,
-            regulated spaces. I love shipping simple solutions that resonate with
-            users and work for the business. Currently, I&apos;m a Senior Product
-            Manager at{" "}
+            I&apos;m a product leader who keeps ending up where money, software,
+            and regulation meet. At{" "}
             <a href="https://rho.co" target="_blank" rel="noopener noreferrer">
               Rho
             </a>
-            , rebuilding the banking platform for an agent-first world.
+            , I&apos;m the banking and AI PM. I&apos;m making business banking
+            seamless and building proactive and programmatic spend insights so
+            founders and their AI agents know what&apos;s financially significant
+            without doing the analysis themselves.
           </p>
 
           <p className="home-blurb">
