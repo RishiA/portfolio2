@@ -29,3 +29,6 @@ pnpm-debug.log*
 /playwright-report
 /test-results
 /coverage
+
+# typescript
+*.tsbuildinfo
