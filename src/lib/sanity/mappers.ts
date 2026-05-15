@@ -24,14 +24,17 @@ const linkPreviewSchema = z.object({
   publishedTime: z.string().optional()
 });
 
+const nullishArray = <T extends z.ZodTypeAny>(schema: T) =>
+  z.array(schema).nullish().transform((v) => v ?? []);
+
 const noteSchema = z.object({
   slug: z.string(),
   kind: z.enum(["text", "link"]),
-  title: z.string().optional(),
-  body: z.array(portableTextBlockSchema).default([]),
-  sourceUrl: z.string().url().optional(),
-  tags: z.array(z.object({ title: z.string(), slug: z.string() })).default([]),
-  linkPreview: linkPreviewSchema.optional(),
+  title: z.string().nullish().transform((v) => v ?? undefined),
+  body: nullishArray(portableTextBlockSchema),
+  sourceUrl: z.string().url().nullish().transform((v) => v ?? undefined),
+  tags: nullishArray(z.object({ title: z.string(), slug: z.string() })),
+  linkPreview: linkPreviewSchema.nullish().transform((v) => v ?? undefined),
   publishedAt: z.string(),
   isPublished: z.boolean().default(false)
 });
@@ -40,11 +43,11 @@ const blogPostSchema = z.object({
   slug: z.string(),
   title: z.string(),
   excerpt: z.string(),
-  body: z.array(portableTextBlockSchema).default([]),
-  coverImage: z.string().url().optional(),
-  tags: z.array(z.object({ title: z.string(), slug: z.string() })).default([]),
+  body: nullishArray(portableTextBlockSchema),
+  coverImage: z.string().url().nullish().transform((v) => v ?? undefined),
+  tags: nullishArray(z.object({ title: z.string(), slug: z.string() })),
   publishedAt: z.string(),
-  updatedAt: z.string().optional(),
+  updatedAt: z.string().nullish().transform((v) => v ?? undefined),
   isPublished: z.boolean().default(false)
 });
 
