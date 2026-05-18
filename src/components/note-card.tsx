@@ -10,7 +10,8 @@ interface NoteCardProps {
 }
 
 export function NoteCard({ note }: NoteCardProps) {
-  const text = note.body[0]?.children?.map((child) => child.text).join(" ") ?? "";
+  const firstTextBlock = note.body.find((block) => block._type === "block");
+  const text = firstTextBlock?.children.map((child) => child.text).join(" ") ?? "";
 
   return (
     <Card>

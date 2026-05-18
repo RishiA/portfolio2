@@ -9,7 +9,13 @@ export const blogPostType = defineType({
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" }, validation: (rule) => rule.required() }),
     defineField({ name: "excerpt", title: "Excerpt", type: "text", rows: 3, validation: (rule) => rule.required() }),
     defineField({ name: "coverImage", title: "Cover Image", type: "image", options: { hotspot: true } }),
-    defineField({ name: "body", title: "Body", type: "array", of: [{ type: "block" }], validation: (rule) => rule.required() }),
+    defineField({
+      name: "body",
+      title: "Body",
+      type: "array",
+      of: [{ type: "block" }, { type: "linkEmbed" }, { type: "youtubeEmbed" }],
+      validation: (rule) => rule.required()
+    }),
     defineField({ name: "tags", title: "Tags", type: "array", of: [{ type: "reference", to: [{ type: "tag" }] }] }),
     defineField({ name: "publishedAt", title: "Published At", type: "datetime", validation: (rule) => rule.required() }),
     defineField({ name: "updatedAt", title: "Updated At", type: "datetime" }),

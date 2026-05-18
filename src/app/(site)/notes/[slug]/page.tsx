@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: NoteDetailPageProps) {
   }
 
   const description = (note.body ?? [])
-    .flatMap((block) => block.children)
+    .flatMap((block) => (block._type === "block" ? block.children : []))
     .map((child) => child.text)
     .join(" ")
     .slice(0, 160)
