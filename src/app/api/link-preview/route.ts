@@ -56,13 +56,13 @@ export async function POST(request: NextRequest) {
     if (
       payload.docId &&
       typeof payload.docId === "string" &&
-      process.env.SANITY_PROJECT_ID &&
-      process.env.SANITY_DATASET &&
+      process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
+      process.env.NEXT_PUBLIC_SANITY_DATASET &&
       process.env.SANITY_WRITE_TOKEN
     ) {
       const client = createClient({
-        projectId: process.env.SANITY_PROJECT_ID,
-        dataset: process.env.SANITY_DATASET,
+        projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+        dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
         apiVersion: process.env.SANITY_API_VERSION || "2025-01-01",
         token: process.env.SANITY_WRITE_TOKEN,
         useCdn: false

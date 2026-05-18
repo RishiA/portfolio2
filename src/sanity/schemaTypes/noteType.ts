@@ -21,7 +21,13 @@ export const noteType = defineType({
       initialValue: "text",
       validation: (rule) => rule.required()
     }),
-    defineField({ name: "body", title: "Body", type: "array", of: [{ type: "block" }], validation: (rule) => rule.required() }),
+    defineField({
+      name: "body",
+      title: "Body",
+      type: "array",
+      of: [{ type: "block" }, { type: "linkEmbed" }, { type: "youtubeEmbed" }],
+      validation: (rule) => rule.required()
+    }),
     defineField({ name: "sourceUrl", title: "Source URL", type: "url" }),
     defineField({ name: "linkPreview", title: "Link Preview", type: "reference", to: [{ type: "linkPreview" }] }),
     defineField({ name: "tags", title: "Tags", type: "array", of: [{ type: "reference", to: [{ type: "tag" }] }] }),

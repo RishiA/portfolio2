@@ -72,8 +72,15 @@ export interface HomeLink {
 
 export type PortableTextChild = {
   _type: "span";
+  _key?: string;
   text: string;
   marks?: string[];
+};
+
+export type PortableTextMarkDef = {
+  _key: string;
+  _type: string;
+  href?: string;
 };
 
 export type PortableTextBlock = {
@@ -81,9 +88,28 @@ export type PortableTextBlock = {
   _key?: string;
   style?: string;
   children: PortableTextChild[];
+  markDefs?: PortableTextMarkDef[];
 };
 
-export type PortableTextValue = PortableTextBlock[];
+export type LinkEmbedBlock = {
+  _type: "linkEmbed";
+  _key?: string;
+  url: string;
+  displayAs: "card" | "inline";
+};
+
+export type YoutubeEmbedBlock = {
+  _type: "youtubeEmbed";
+  _key?: string;
+  url: string;
+  title?: string;
+};
+
+export type PortableTextBodyBlock =
+  | PortableTextBlock
+  | LinkEmbedBlock
+  | YoutubeEmbedBlock;
+export type PortableTextValue = PortableTextBodyBlock[];
 
 export interface Note {
   slug: string;
