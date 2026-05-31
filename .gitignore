@@ -32,3 +32,6 @@ pnpm-debug.log*
 
 # typescript
 *.tsbuildinfo
+
+# local working notes
+/portfoliov2_plan.md
