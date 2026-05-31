@@ -31,28 +31,6 @@ export const metadata: Metadata = {
   title: {
     default: "Rishi Athanikar",
     template: "%s | Rishi Athanikar"
-  },
-  description:
-    "Rishi Athanikar is a product manager in New York who builds for complex, regulated systems. Work history, writing, and side projects.",
-  openGraph: {
-    type: "website",
-    siteName: "Rishi Athanikar",
-    title: "Rishi Athanikar",
-    description: "Product manager in New York. Work history, writing, and side projects.",
-    url: baseUrl,
-    images: [
-      {
-        url: "/images/rishi_sketch.webp",
-        width: 900,
-        height: 900,
-        alt: "Rishi Athanikar"
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Rishi Athanikar",
-    description: "Product manager in New York. Work history, writing, and side projects."
   }
 };
 

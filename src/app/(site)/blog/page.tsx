@@ -3,14 +3,17 @@ import Link from "next/link";
 import { BlogCard } from "@/components/blog-card";
 import { Container } from "@/components/container";
 import { Section } from "@/components/section";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { getBlogPosts } from "@/lib/sanity/loaders";
 
 const PAGE_SIZE = 6;
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Blog",
-  description: "Longer writing on product, technology, and building things by Rishi Athanikar."
-};
+  description:
+    "Longer essays from Rishi Athanikar on product strategy, regulated software, and building things in fintech and AI.",
+  path: "/blog"
+});
 
 export const revalidate = 60;
 

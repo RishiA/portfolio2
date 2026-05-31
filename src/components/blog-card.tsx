@@ -18,11 +18,13 @@ export function BlogCard({ post }: BlogCardProps) {
         <Link href={`/blog/${post.slug}`}>{post.title}</Link>
       </h3>
       <p>{post.excerpt}</p>
-      <div className="tag-row">
-        {post.tags.map((tag) => (
-          <Tag key={tag}>{tag}</Tag>
-        ))}
-      </div>
+      {post.tags.length ? (
+        <div className="tag-row" aria-label={`Tags: ${post.tags.join(", ")}`}>
+          {post.tags.map((tag) => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </div>
+      ) : null}
     </Card>
   );
 }

@@ -6,6 +6,7 @@ import { Section } from "@/components/section";
 import { Tag } from "@/components/tag";
 import { formatDate } from "@/lib/utils/date";
 import { getNoteBySlug, getNotes } from "@/lib/sanity/loaders";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 
 export const revalidate = 3600;
 
@@ -23,28 +24,32 @@ export async function generateMetadata({ params }: NoteDetailPageProps) {
   const note = await getNoteBySlug(slug);
 
   if (!note) {
-    return { title: "Note" };
+    return pageMetadata({
+      title: "Note",
+      description: "Short writing from Rishi Athanikar.",
+      path: "/notes"
+    });
   }
 
-  const description = (note.body ?? [])
+  const bodyText = (note.body ?? [])
     .flatMap((block) => (block._type === "block" ? block.children : []))
     .map((child) => child.text)
     .join(" ")
-    .slice(0, 160)
     .trim();
+  const description = (bodyText || "Short note from Rishi Athanikar.").slice(0, 160).trim();
 
-  const ogImage = note.linkPreview?.image;
+  const ogImage = note.linkPreview?.image
+    ? { url: note.linkPreview.image, alt: note.title ?? "Note" }
+    : undefined;
 
-  return {
+  return pageMetadata({
     title: note.title ?? "Note",
-    ...(description ? { description } : {}),
-    openGraph: {
-      type: "article" as const,
-      title: note.title ?? "Note",
-      ...(description ? { description } : {}),
-      ...(ogImage ? { images: [{ url: ogImage }] } : {})
-    }
-  };
+    description,
+    path: `/notes/${note.slug}`,
+    type: "article",
+    publishedTime: note.publishedAt,
+    ...(ogImage ? { ogImage } : {})
+  });
 }
 
 export default async function NoteDetailPage({ params }: NoteDetailPageProps) {
@@ -61,11 +66,13 @@ export default async function NoteDetailPage({ params }: NoteDetailPageProps) {
         <article className="prose">
           <PortableTextRenderer value={note.body} />
           {note.linkPreview ? <LinkPreviewCard preview={note.linkPreview} /> : null}
-          <div className="tag-row">
-            {note.tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </div>
+          {note.tags.length ? (
+            <div className="tag-row" aria-label={`Tags: ${note.tags.join(", ")}`}>
+              {note.tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </div>
+          ) : null}
         </article>
       </Section>
     </Container>

@@ -29,11 +29,13 @@ export function WorkCard({ item }: WorkCardProps) {
         </ul>
       ) : null}
 
-      <div className="tag-row">
-        {item.tags.map((tag) => (
-          <Tag key={tag}>{tag}</Tag>
-        ))}
-      </div>
+      {item.tags.length ? (
+        <div className="tag-row" aria-label={`Tags: ${item.tags.join(", ")}`}>
+          {item.tags.map((tag) => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </div>
+      ) : null}
     </article>
   );
 }
