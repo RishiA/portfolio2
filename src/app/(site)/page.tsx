@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/container";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import type { HomeLink } from "@/types/content";
 
 const homeLinks: HomeLink[] = [
@@ -10,6 +11,14 @@ const homeLinks: HomeLink[] = [
   { label: "Notes", href: "/notes" },
   { label: "Blog", href: "/blog" }
 ];
+
+export const metadata = pageMetadata({
+  title: "Rishi Athanikar",
+  titleAbsolute: true,
+  description:
+    "Rishi Athanikar is a product manager in New York building in fintech, banking, and regulated AI. Portfolio, writing, and side projects.",
+  path: "/"
+});
 
 export default function HomePage() {
   return (

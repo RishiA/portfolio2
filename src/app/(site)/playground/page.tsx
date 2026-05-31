@@ -2,11 +2,15 @@ import Link from "next/link";
 import { Container } from "@/components/container";
 import { PlaygroundCard } from "@/components/playground-card";
 import { Section } from "@/components/section";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { playgroundItems } from "@/content/playground";
 
-export const metadata = {
-  title: "Playground"
-};
+export const metadata = pageMetadata({
+  title: "Playground",
+  description:
+    "Side projects and experiments from Rishi Athanikar in product, AI, and software design.",
+  path: "/playground"
+});
 
 interface PlaygroundPageProps {
   searchParams?: Promise<{ status?: "live" | "wip" | "archived" }>;

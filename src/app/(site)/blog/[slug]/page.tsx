@@ -5,6 +5,7 @@ import { Section } from "@/components/section";
 import { Tag } from "@/components/tag";
 import { formatDate } from "@/lib/utils/date";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/sanity/loaders";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 
 export const revalidate = 3600;
 
@@ -22,29 +23,26 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
   const post = await getBlogPostBySlug(slug);
 
   if (!post) {
-    return { title: "Blog" };
+    return pageMetadata({
+      title: "Blog",
+      description: "Longer writing from Rishi Athanikar.",
+      path: "/blog"
+    });
   }
 
-  return {
+  const ogImage = post.coverImage
+    ? { url: post.coverImage, alt: post.title }
+    : undefined;
+
+  return pageMetadata({
     title: post.title,
     description: post.excerpt,
-    openGraph: {
-      type: "article" as const,
-      title: post.title,
-      description: post.excerpt,
-      ...(post.coverImage ? { images: [{ url: post.coverImage }] } : {})
-    },
-    ...(post.coverImage
-      ? {
-          twitter: {
-            card: "summary_large_image" as const,
-            title: post.title,
-            description: post.excerpt,
-            images: [post.coverImage]
-          }
-        }
-      : {})
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt,
+    ...(ogImage ? { ogImage } : {})
+  });
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
@@ -61,11 +59,13 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         <article className="prose">
           <p>{post.excerpt}</p>
           <PortableTextRenderer value={post.body} />
-          <div className="tag-row">
-            {post.tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </div>
+          {post.tags.length ? (
+            <div className="tag-row" aria-label={`Tags: ${post.tags.join(", ")}`}>
+              {post.tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </div>
+          ) : null}
         </article>
       </Section>
     </Container>

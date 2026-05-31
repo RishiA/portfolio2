@@ -1,9 +1,13 @@
 import { Container } from "@/components/container";
 import { Section } from "@/components/section";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata = {
-  title: "About"
-};
+export const metadata = pageMetadata({
+  title: "About",
+  description:
+    "About Rishi Athanikar, a product manager in New York shipping in fintech, banking, and regulated AI software.",
+  path: "/about"
+});
 
 export default function AboutPage() {
   return (

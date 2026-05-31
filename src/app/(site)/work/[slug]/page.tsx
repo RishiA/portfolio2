@@ -3,6 +3,7 @@ import { Container } from "@/components/container";
 import { Section } from "@/components/section";
 import { Tag } from "@/components/tag";
 import { workItems } from "@/content/work";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 
 interface WorkDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -17,18 +18,19 @@ export async function generateMetadata({ params }: WorkDetailPageProps) {
   const item = workItems.find((entry) => entry.slug === slug);
 
   if (!item) {
-    return { title: "Work" };
+    return pageMetadata({
+      title: "Work",
+      description: "Work history from Rishi Athanikar.",
+      path: "/work"
+    });
   }
 
-  return {
-    title: item.organization,
+  return pageMetadata({
+    title: `${item.organization} — ${item.roleTitle}`,
     description: item.summary,
-    openGraph: {
-      type: "profile" as const,
-      title: item.organization,
-      description: item.summary
-    }
-  };
+    path: `/work/${item.slug}`,
+    type: "article"
+  });
 }
 
 export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
@@ -92,11 +94,13 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
             </>
           ) : null}
 
-          <div className="tag-row">
-            {item.tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </div>
+          {item.tags.length ? (
+            <div className="tag-row" aria-label={`Tags: ${item.tags.join(", ")}`}>
+              {item.tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </div>
+          ) : null}
         </div>
       </Section>
     </Container>

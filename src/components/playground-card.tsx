@@ -12,11 +12,13 @@ export function PlaygroundCard({ item }: PlaygroundCardProps) {
       <p className="eyebrow">{item.status.toUpperCase()}</p>
       <h3>{item.name}</h3>
       <p>{item.oneLiner}</p>
-      <div className="tag-row">
-        {item.stack.map((tool) => (
-          <Tag key={tool}>{tool}</Tag>
-        ))}
-      </div>
+      {item.stack.length ? (
+        <div className="tag-row" aria-label={`Stack: ${item.stack.join(", ")}`}>
+          {item.stack.map((tool) => (
+            <Tag key={tool}>{tool}</Tag>
+          ))}
+        </div>
+      ) : null}
       <div className="action-row">
         {item.liveUrl ? (
           <a href={item.liveUrl} target="_blank" rel="noopener noreferrer">

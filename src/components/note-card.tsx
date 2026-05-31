@@ -21,11 +21,13 @@ export function NoteCard({ note }: NoteCardProps) {
       </h3>
       <p>{text}</p>
       {note.linkPreview ? <LinkPreviewCard preview={note.linkPreview} /> : null}
-      <div className="tag-row">
-        {note.tags.map((tag) => (
-          <Tag key={tag}>{tag}</Tag>
-        ))}
-      </div>
+      {note.tags.length ? (
+        <div className="tag-row" aria-label={`Tags: ${note.tags.join(", ")}`}>
+          {note.tags.map((tag) => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </div>
+      ) : null}
     </Card>
   );
 }
