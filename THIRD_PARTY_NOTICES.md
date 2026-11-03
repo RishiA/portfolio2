@@ -41,6 +41,18 @@ site's content instead of Supabase.
 - `src/components/v2/desktop/window-nav-shell.tsx`
 - `src/components/v2/desktop/window.tsx`
 - `src/components/v2/ui/context-menu.tsx`
+- `src/components/v2/apps/settings/categories.tsx`
+- `src/components/v2/apps/settings/content.tsx`
+- `src/components/v2/apps/settings/index.tsx`
+- `src/components/v2/apps/settings/nav.tsx`
+- `src/components/v2/apps/settings/panels/appearance.tsx`
+- `src/components/v2/apps/settings/panels/desktop-dock.tsx`
+- `src/components/v2/apps/settings/panels/menu-bar.tsx`
+- `src/components/v2/apps/settings/panels/wallpaper.tsx`
+- `src/components/v2/apps/settings/settings-switch.tsx`
+- `src/components/v2/apps/settings/sidebar-nav.tsx`
+- `src/components/v2/apps/settings/sidebar.tsx`
+- `src/components/v2/apps/trash/index.tsx`
 - `src/lib/v2/app-availability.ts`
 - `src/lib/v2/app-config.ts`
 - `src/lib/v2/app-shell-page.tsx`
@@ -68,6 +80,7 @@ site's content instead of Supabase.
 - `src/components/v2/apps/photos/photo-viewer.tsx`
 - `src/components/v2/apps/photos/photos-grid.tsx`
 - `src/components/v2/apps/photos/sidebar.tsx`
+- `src/lib/v2/settings/search-items.ts`
 - `src/lib/v2/photos/favorites.ts`
 - `src/lib/v2/photos/grid-size.ts`
 - `src/lib/v2/photos/photo-metadata.ts`
