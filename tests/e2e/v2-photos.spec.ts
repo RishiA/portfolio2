@@ -13,12 +13,12 @@ test.describe("v2 Photos app", () => {
     await expect(page.getByRole("heading", { name: "Library" })).toBeVisible();
     await expect(page.getByTestId("photo-tile")).toHaveCount(6);
 
-    await page.getByRole("button", { name: "years" }).click();
+    await page.getByTestId("app-window-photos").getByRole("button", { name: "years", exact: true }).click();
     await expect(page.getByRole("heading", { name: "2023" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "2024" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "2025" })).toBeVisible();
 
-    await page.getByRole("button", { name: "months" }).click();
+    await page.getByTestId("app-window-photos").getByRole("button", { name: "months", exact: true }).click();
     await expect(page.getByRole("heading", { name: "March 2023" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "May 2025" })).toBeVisible();
 
@@ -67,6 +67,6 @@ test.describe("v2 Photos app", () => {
     await expect(page.getByTestId("photos-empty")).toHaveText("No photos yet");
     await expect(page.getByRole("heading", { name: "Library" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Favorites", exact: true })).toBeVisible();
-    await expect(page.getByRole("button", { name: "years" })).toBeVisible();
+    await expect(page.getByTestId("app-window-photos").getByRole("button", { name: "years", exact: true })).toBeVisible();
   });
 });
