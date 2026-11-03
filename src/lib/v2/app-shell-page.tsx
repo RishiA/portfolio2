@@ -6,21 +6,20 @@ import { MobileShell } from "@/components/v2/desktop/mobile-shell";
 import { SystemSettingsProvider } from "@/lib/v2/system-settings-context";
 import { SHELL_DEFAULT_APP_ID } from "@/lib/v2/shell-routing";
 import { useShellIsMobile } from "@/lib/v2/use-shell-is-mobile";
-import { ShellBootProvider } from "@/lib/v2/shell-boot-context";
+import { ShellBootProvider, type ShellBoot } from "@/lib/v2/shell-boot-context";
 
-interface AppShellPageProps {
+interface AppShellPageProps extends Pick<ShellBoot, "initialNoteSlug" | "initialNotes" | "initialNote"> {
   appId?: string;
-  initialNoteSlug?: string;
 }
 
 /** Renders the desktop shell, or one full-screen app on phones. Every /v2 route renders this. */
-export function AppShellPage({ appId, initialNoteSlug }: AppShellPageProps) {
+export function AppShellPage({ appId, initialNoteSlug, initialNotes, initialNote }: AppShellPageProps) {
   const isMobile = useShellIsMobile();
 
   if (isMobile === null) return null;
 
   return (
-    <ShellBootProvider value={{ initialNoteSlug }}>
+    <ShellBootProvider value={{ initialNoteSlug, initialNotes, initialNote }}>
       <SystemSettingsProvider>
         {isMobile ? (
           <MobileShell initialApp={appId || SHELL_DEFAULT_APP_ID} />

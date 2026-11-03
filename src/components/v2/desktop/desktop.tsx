@@ -12,6 +12,7 @@ import { MenuBar } from "./menu-bar";
 import { Dock } from "./dock";
 import { Window } from "./window";
 import { AppBody } from "@/components/v2/apps/registry";
+import { getLastSelectedSlug } from "@/lib/v2/notes/client";
 
 interface DesktopProps {
   initialAppId?: string;
@@ -33,7 +34,7 @@ function DesktopContent({ initialNoteSlug }: { initialNoteSlug?: string }) {
     const nextUrl = getShellUrlForApp(focusedAppId, {
       context: "desktop",
       currentPathname: window.location.pathname,
-      noteSlug: initialNoteSlug,
+      noteSlug: getLastSelectedSlug() ?? initialNoteSlug,
     });
     if (nextUrl) {
       setUrl(nextUrl);

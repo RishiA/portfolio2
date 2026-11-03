@@ -18,6 +18,7 @@
     "@modelcontextprotocol/sdk": "^1.32.2",
     "@portabletext/react": "^3.2.0",
     "@radix-ui/react-context-menu": "^2.4.1",
+    "@radix-ui/react-scroll-area": "^1.4.0",
     "@sanity/client": "^7.11.0",
     "@sanity/image-url": "^1.2.0",
     "cheerio": "^1.2.0",

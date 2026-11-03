@@ -32,7 +32,7 @@ test.describe("v2 desktop shell", () => {
     await expect(page.getByRole("button", { name: "Resize Dock" })).toBeVisible();
 
     await expect(page.getByTestId("app-window-notes")).toBeVisible();
-    await expect(page).toHaveURL(/\/v2\/notes$/);
+    await expect(page).toHaveURL(/\/v2\/notes(\/[a-z0-9-]+)?$/);
   });
 
   test("switches to Music from the Dock without a reload", async ({ page }) => {
@@ -56,7 +56,7 @@ test.describe("v2 desktop shell", () => {
     expect(await page.evaluate(() => (window as unknown as { __noReload?: boolean }).__noReload)).toBe(true);
 
     await page.getByTestId("dock-app-notes").click();
-    await expect(page).toHaveURL(/\/v2\/notes$/);
+    await expect(page).toHaveURL(/\/v2\/notes(\/[a-z0-9-]+)?$/);
     expect(await page.evaluate(() => (window as unknown as { __noReload?: boolean }).__noReload)).toBe(true);
     expect(errors).toEqual([]);
   });
@@ -100,7 +100,7 @@ test.describe("v2 on a phone", () => {
     await expect(page.getByTestId("app-window-notes")).toBeVisible();
     await expect(page.getByTestId("menu-bar")).toHaveCount(0);
     await expect(page.getByTestId("dock-app-notes")).toHaveCount(0);
-    await expect(page).toHaveURL(/\/v2\/notes$/);
+    await expect(page).toHaveURL(/\/v2\/notes(\/[a-z0-9-]+)?$/);
   });
 });
 

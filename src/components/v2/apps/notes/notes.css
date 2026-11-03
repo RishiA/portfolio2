@@ -1,0 +1,154 @@
+/* Adapted from github.com/alanagoyal/alanagoyal, Copyright (c) 2024 Alana Goyal, MIT License. */
+/* Reading-pane typography, ported from her github-markdown.css. Scoped to .v2-notes-body so v1 is untouched. */
+.v2-notes-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin-left: 0;
+  line-height: 1.5;
+}
+
+.v2-notes-body h1 {
+  font-size: 2em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.v2-notes-body h2 {
+  font-size: 1.5em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.v2-notes-body h3 {
+  font-size: 1.25em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.v2-notes-body h4,
+.v2-notes-body h5,
+.v2-notes-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.v2-notes-body p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.v2-notes-body a {
+  color: #e2a727;
+  text-decoration: underline;
+}
+
+.v2-notes-body ul {
+  list-style-type: disc;
+  padding-left: 2em;
+  margin-bottom: 16px;
+}
+
+.v2-notes-body ul ul {
+  list-style-type: circle;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.v2-notes-body ul ul ul {
+  list-style-type: square;
+}
+
+.v2-notes-body ol {
+  list-style-type: decimal;
+  padding-left: 2em;
+  margin-bottom: 16px;
+}
+
+.v2-notes-body li {
+  margin: 0.5em 0;
+}
+
+.v2-notes-body blockquote {
+  padding: 0 1em;
+  margin: 0 0 16px;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+}
+
+.v2-notes-body code {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  padding: 0.2em 0.4em;
+  font-size: 85%;
+}
+
+.v2-notes-body pre {
+  background-color: #f6f8fa;
+  padding: 16px;
+  overflow: auto;
+  border-radius: 3px;
+}
+
+.v2-notes-body pre code {
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  font-size: 100%;
+}
+
+.dark .v2-notes-body code {
+  background-color: #30363d;
+}
+
+.dark .v2-notes-body pre {
+  background-color: #1f2937;
+}
+
+.dark .v2-notes-body pre code {
+  background-color: transparent;
+}
+
+.v2-notes-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.v2-notes-body table th,
+.v2-notes-body table td {
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #d0d7de;
+}
+
+.v2-notes-body table th {
+  font-weight: 600;
+}
+
+.dark .v2-notes-body table th,
+.dark .v2-notes-body table td {
+  border: 1px solid #4a4a4a;
+}
+
+.v2-notes-body img {
+  max-width: 672px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border-radius: 4px;
+}
+
+/* Golden caret, as in her Notes app. */
+.v2-notes-app * {
+  caret-color: #e2a727;
+}
