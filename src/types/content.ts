@@ -137,3 +137,37 @@ export interface BlogPost {
   isPublished: boolean;
   readingTimeMinutes: number;
 }
+
+export type PhotoAlbum = "people" | "places" | "food" | "things";
+
+export interface PhotoDetails {
+  make?: string;
+  model?: string;
+  lensModel?: string;
+  fNumber?: number;
+  focalLength35mm?: number;
+  iso?: number;
+  exposureTime?: number;
+  exposureCompensation?: number;
+  fileSize?: number;
+  mimeType?: string;
+}
+
+export interface Photo {
+  id: string;
+  /** Original image URL. */
+  url: string;
+  /** About 400px wide, quality 75, for the grid. */
+  thumbnailUrl: string;
+  /** About 1600px wide, quality 85, for the viewer. */
+  viewerUrl: string;
+  width: number;
+  height: number;
+  takenAt: string;
+  caption?: string;
+  alt: string;
+  album?: PhotoAlbum;
+  useAsWallpaper: boolean;
+  lqip?: string;
+  details: PhotoDetails;
+}

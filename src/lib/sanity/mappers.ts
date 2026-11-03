@@ -1,7 +1,9 @@
+import imageUrlBuilder from "@sanity/image-url";
 import readingTime from "reading-time";
 import { z } from "zod";
+import { sanityConfig } from "@/lib/sanity/client";
 import { autoLinkBody } from "@/lib/portable-text/auto-link";
-import type { BlogPost, Note, PortableTextValue } from "@/types/content";
+import type { BlogPost, Note, Photo, PhotoDetails, PortableTextValue } from "@/types/content";
 
 const portableTextSpanSchema = z.object({
   _type: z.literal("span"),
@@ -133,5 +135,98 @@ export const mapBlogPost = (input: unknown): BlogPost => {
     updatedAt: parsed.updatedAt,
     isPublished: parsed.isPublished,
     readingTimeMinutes
+  };
+};
+
+const PHOTO_ALBUM_VALUES = ["people", "places", "food", "things"] as const;
+const THUMBNAIL_WIDTH = 400;
+const THUMBNAIL_QUALITY = 75;
+const VIEWER_WIDTH = 1600;
+const VIEWER_QUALITY = 85;
+
+const nullableNumber = z.preprocess((value) => (typeof value === "number" && Number.isFinite(value) ? value : undefined), z.number().optional());
+const nullableString = z.preprocess((value) => (typeof value === "string" && value.trim() ? value.trim() : undefined), z.string().optional());
+
+const photoExifSchema = z
+  .object({
+    Make: nullableString,
+    Model: nullableString,
+    LensModel: nullableString,
+    FNumber: nullableNumber,
+    FocalLengthIn35mmFormat: nullableNumber,
+    ISO: nullableNumber,
+    ExposureTime: nullableNumber,
+    ExposureCompensation: nullableNumber,
+    ExposureBiasValue: nullableNumber
+  })
+  .passthrough();
+
+const photoSchema = z.object({
+  id: z.string(),
+  assetId: z.string(),
+  hotspot: z.object({ x: z.number(), y: z.number(), height: z.number(), width: z.number() }).nullish(),
+  crop: z.object({ top: z.number(), bottom: z.number(), left: z.number(), right: z.number() }).nullish(),
+  asset: z.object({
+    size: nullableNumber,
+    mimeType: nullableString,
+    metadata: z
+      .object({
+        dimensions: z.object({ width: z.number(), height: z.number() }),
+        lqip: nullableString,
+        exif: photoExifSchema.nullish()
+      })
+      .passthrough()
+  }),
+  takenAt: z.string(),
+  caption: z.string().nullish().transform((v) => v?.trim() || undefined),
+  alt: z.string(),
+  album: z.enum(PHOTO_ALBUM_VALUES).nullish().transform((v) => v ?? undefined),
+  useAsWallpaper: z.boolean().nullish().transform((v) => v ?? false)
+});
+
+const photoImageBuilder = () =>
+  imageUrlBuilder({
+    projectId: sanityConfig.projectId ?? "unconfigured",
+    dataset: sanityConfig.dataset
+  });
+
+export const mapPhoto = (input: unknown): Photo => {
+  const parsed = photoSchema.parse(input);
+  const { dimensions, lqip, exif } = parsed.asset.metadata;
+  const source = { asset: { _ref: parsed.assetId }, hotspot: parsed.hotspot ?? undefined, crop: parsed.crop ?? undefined };
+  const sized = (width: number, quality: number) =>
+    photoImageBuilder().image(source).width(width).fit("max").quality(quality).auto("format").url();
+
+  const crop = parsed.crop;
+  const width = Math.round(dimensions.width * (1 - (crop?.left ?? 0) - (crop?.right ?? 0)));
+  const height = Math.round(dimensions.height * (1 - (crop?.top ?? 0) - (crop?.bottom ?? 0)));
+
+  const details: PhotoDetails = {
+    make: exif?.Make,
+    model: exif?.Model,
+    lensModel: exif?.LensModel,
+    fNumber: exif?.FNumber,
+    focalLength35mm: exif?.FocalLengthIn35mmFormat,
+    iso: exif?.ISO,
+    exposureTime: exif?.ExposureTime,
+    exposureCompensation: exif?.ExposureCompensation ?? exif?.ExposureBiasValue,
+    fileSize: parsed.asset.size,
+    mimeType: parsed.asset.mimeType
+  };
+
+  return {
+    id: parsed.id,
+    url: photoImageBuilder().image(source).url(),
+    thumbnailUrl: sized(THUMBNAIL_WIDTH, THUMBNAIL_QUALITY),
+    viewerUrl: sized(VIEWER_WIDTH, VIEWER_QUALITY),
+    width,
+    height,
+    takenAt: parsed.takenAt,
+    caption: parsed.caption,
+    alt: parsed.alt,
+    album: parsed.album,
+    useAsWallpaper: parsed.useAsWallpaper,
+    lqip,
+    details
   };
 };
