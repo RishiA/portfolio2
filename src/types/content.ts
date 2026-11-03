@@ -119,6 +119,8 @@ export interface Note {
   sourceUrl?: string;
   linkPreview?: LinkPreview;
   tags: string[];
+  emoji?: string;
+  pinned?: boolean;
   publishedAt: string;
   isPublished: boolean;
 }

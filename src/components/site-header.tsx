@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Container } from "@/components/container";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { publicLinks } from "@/content/about";
 
 const navItems = [
   { href: "/work", label: "Proof of Work" },
@@ -14,23 +15,9 @@ const navItems = [
   { href: "/blog", label: "Blog" }
 ];
 
-const socialLinks = [
-  {
-    href: "https://linkedin.com/in/rishiathanikar",
-    label: "LinkedIn",
-    Icon: Linkedin
-  },
-  {
-    href: "https://github.com/rishia",
-    label: "GitHub",
-    Icon: Github
-  },
-  {
-    href: "https://x.com/ARishi_",
-    label: "X (Twitter)",
-    Icon: Twitter
-  }
-] as const;
+const socialIcons = { linkedin: Linkedin, github: Github, x: Twitter } as const;
+
+const socialLinks = publicLinks.map(({ id, href, label }) => ({ href, label, Icon: socialIcons[id] }));
 
 export function SiteHeader() {
   const pathname = usePathname();
