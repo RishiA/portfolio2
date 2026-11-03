@@ -83,16 +83,14 @@ export function useNotes(isMobile: boolean) {
     });
   }, [selectedSlug]);
 
-  // Keep the address bar on the selected note. The Desktop effect that follows window focus runs first, so wait a tick.
+  // Keep the address bar on the selected note when the visitor picks one. When Notes regains focus,
+  // the Desktop reads the same slug through getLastSelectedSlug().
   useEffect(() => {
     if (!selectedSlug) return;
-    const timer = window.setTimeout(() => {
-      const route = getNotesRoute(selectedSlug);
-      if ((isFocused || isNotesPath(window.location.pathname)) && window.location.pathname !== route) {
-        setUrl(route);
-      }
-    }, 0);
-    return () => window.clearTimeout(timer);
+    const route = getNotesRoute(selectedSlug);
+    if ((isFocused || isNotesPath(window.location.pathname)) && window.location.pathname !== route) {
+      setUrl(route);
+    }
   }, [selectedSlug, isFocused]);
 
   const select = useCallback((slug: string) => setSelectedSlug(slug), []);

@@ -57,6 +57,20 @@ test.describe("v2 Notes on desktop", () => {
     expect(await page.evaluate(() => (window as unknown as { __noReload?: boolean }).__noReload)).toBe(true);
   });
 
+  test("keeps the selected note in the URL after switching to another app and back", async ({ page }) => {
+    await page.goto("/v2/notes/about-me");
+    await expect(notesWindow(page).getByRole("heading", { level: 1, name: /About me/ })).toBeVisible();
+    await page.keyboard.press("ArrowDown");
+    await expect(page).toHaveURL(/\/v2\/notes\/proof-of-work$/);
+
+    await page.getByTestId("dock-app-music").click();
+    await expect(page).toHaveURL(/\/v2\/music$/);
+    await page.getByTestId("dock-app-notes").click();
+
+    await expect(page).toHaveURL(/\/v2\/notes\/proof-of-work$/);
+    await expect(notesWindow(page).getByRole("heading", { level: 1, name: /Proof of work/ })).toBeVisible();
+  });
+
   test("shows the v2 not-found page for an unknown note", async ({ page }) => {
     const response = await page.goto("/v2/notes/does-not-exist");
     expect(response?.status()).toBe(404);
