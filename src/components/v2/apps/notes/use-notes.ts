@@ -12,6 +12,7 @@ import {
   getCachedDetail,
   getCachedList,
   getLastSelectedSlug,
+  NOTE_SELECT_EVENT,
   rememberSelectedSlug,
   seedNotesCache
 } from "@/lib/v2/notes/client";
@@ -53,6 +54,13 @@ export function useNotes(isMobile: boolean) {
       cancelled = true;
     };
   }, [notes]);
+
+  // Another app, e.g. the terminal, can ask Notes to show a note.
+  useEffect(() => {
+    const onSelect = (event: Event) => setSelectedSlug((event as CustomEvent<string>).detail);
+    window.addEventListener(NOTE_SELECT_EVENT, onSelect);
+    return () => window.removeEventListener(NOTE_SELECT_EVENT, onSelect);
+  }, []);
 
   // A slug that is not in the list falls back to the first note on desktop and to the list on phones.
   useEffect(() => {

@@ -5,7 +5,8 @@ import { useCallback } from "react";
 import { WindowControls } from "@/components/v2/desktop/window-controls";
 import { WindowNavShell, WindowNavSpacer } from "@/components/v2/desktop/window-nav-shell";
 import type { V2AppProps } from "@/components/v2/apps/types";
-import { setUrl } from "@/lib/v2/set-url";
+import { requestNoteSelection } from "@/lib/v2/notes/client";
+import { SHELL_NOTES_ROOT_PATH } from "@/lib/v2/shell-routing";
 import { useWindowNavBehavior } from "@/lib/v2/use-window-nav-behavior";
 import { useWindowManager } from "@/lib/v2/window-context";
 import { Terminal } from "./Terminal";
@@ -18,9 +19,9 @@ export default function TerminalApp({ isMobile = false }: V2AppProps) {
 
   const openNote = useCallback(
     (href: string) => {
+      requestNoteSelection(decodeURIComponent(href.slice(`${SHELL_NOTES_ROOT_PATH}/`.length)));
       openWindow("notes");
       if (getWindow("notes")?.isMinimized) unminimizeWindow("notes");
-      setUrl(href);
     },
     [openWindow, unminimizeWindow, getWindow]
   );

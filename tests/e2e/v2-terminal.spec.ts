@@ -41,5 +41,9 @@ test("terminal window runs /help, completes with Tab and opens a note in the Not
   await firstResult.click();
   await expect(page).toHaveURL(new RegExp(`${href}$`));
   await expect(page.getByTestId("app-window-notes")).toBeVisible();
+  const linkText = (await firstResult.textContent())?.trim() ?? "";
+  await expect(
+    page.getByTestId("app-window-notes").getByRole("heading", { level: 1, name: linkText, exact: true })
+  ).toBeVisible();
   expect(documentLoads).toBe(loadsBeforeClick);
 });
