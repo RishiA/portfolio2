@@ -69,3 +69,24 @@ export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current ==
   updatedAt,
   isPublished
 }`;
+
+const photoProjection = `{
+  "id": _id,
+  "assetId": image.asset._ref,
+  "hotspot": image.hotspot,
+  "crop": image.crop,
+  "asset": image.asset->{
+    size,
+    mimeType,
+    metadata{ dimensions{ width, height }, lqip, exif }
+  },
+  takenAt,
+  caption,
+  alt,
+  album,
+  useAsWallpaper
+}`;
+
+export const photosQuery = groq`*[_type == "photo" && defined(image.asset)] | order(takenAt desc)${photoProjection}`;
+
+export const wallpaperPhotosQuery = groq`*[_type == "photo" && useAsWallpaper == true && defined(image.asset)] | order(takenAt desc)${photoProjection}`;

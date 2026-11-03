@@ -62,6 +62,20 @@ site's content instead of Supabase.
 - `src/lib/v2/window-context.tsx`
 - `src/lib/v2/window-focus-context.tsx`
 - `src/lib/v2/window-state-storage.ts`
+- `src/components/v2/apps/photos/header.tsx`
+- `src/components/v2/apps/photos/index.tsx`
+- `src/components/v2/apps/photos/nav.tsx`
+- `src/components/v2/apps/photos/photo-viewer.tsx`
+- `src/components/v2/apps/photos/photos-grid.tsx`
+- `src/components/v2/apps/photos/sidebar.tsx`
+- `src/lib/v2/photos/favorites.ts`
+- `src/lib/v2/photos/grid-size.ts`
+- `src/lib/v2/photos/photo-metadata.ts`
+- `src/lib/v2/photos/photo-transition.ts`
+- `src/lib/v2/photos/time-groups.ts`
+- `src/lib/v2/photos/types.ts`
+- `src/lib/v2/photos/use-photos.ts`
+- `src/lib/v2/photos/wheel-navigation.ts`
 - `tailwind.config.ts`
 
 ### License
