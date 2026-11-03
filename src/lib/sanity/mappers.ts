@@ -3,6 +3,7 @@ import readingTime from "reading-time";
 import { z } from "zod";
 import { sanityConfig } from "@/lib/sanity/client";
 import { autoLinkBody } from "@/lib/portable-text/auto-link";
+import type { PlaylistEntry } from "@/lib/v2/music/itunes";
 import type { BlogPost, Note, Photo, PhotoDetails, PortableTextValue } from "@/types/content";
 
 const portableTextSpanSchema = z.object({
@@ -230,3 +231,26 @@ export const mapPhoto = (input: unknown): Photo => {
     details
   };
 };
+const playlistEntrySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  emoji: z.string().nullish(),
+  description: z.string().nullish(),
+  tracks: z
+    .array(
+      z.object({
+        appleMusicUrl: z.string().url(),
+        title: z.string().nullish(),
+        artist: z.string().nullish()
+      })
+    )
+    .nullish()
+    .transform((tracks) => tracks ?? [])
+});
+
+/** Maps Sanity playlist documents, skipping any that do not match the schema. */
+export const mapPlaylistEntries = (input: unknown[]): PlaylistEntry[] =>
+  input.flatMap((doc) => {
+    const parsed = playlistEntrySchema.safeParse(doc);
+    return parsed.success ? [parsed.data] : [];
+  });

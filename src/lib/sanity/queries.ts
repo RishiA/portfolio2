@@ -90,3 +90,11 @@ const photoProjection = `{
 export const photosQuery = groq`*[_type == "photo" && defined(image.asset)] | order(takenAt desc)${photoProjection}`;
 
 export const wallpaperPhotosQuery = groq`*[_type == "photo" && useAsWallpaper == true && defined(image.asset)] | order(takenAt desc)${photoProjection}`;
+
+export const playlistsQuery = groq`*[_type == "playlist"] | order(order asc, _createdAt asc){
+  "id": _id,
+  name,
+  emoji,
+  description,
+  tracks[]{ appleMusicUrl, title, artist }
+}`;
