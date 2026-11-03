@@ -26,6 +26,8 @@ site's content instead of Supabase.
 - `src/components/v2/apps/notes/scroll-area.tsx`
 - `src/components/v2/apps/notes/search-bar.tsx`
 - `src/components/v2/apps/notes/sidebar.tsx`
+- `src/components/v2/apps/terminal/Terminal.tsx`
+- `src/components/v2/apps/terminal/index.tsx`
 - `src/components/v2/desktop/about-dialog.tsx`
 - `src/components/v2/desktop/app-menu.tsx`
 - `src/components/v2/desktop/app-placeholder.tsx`
