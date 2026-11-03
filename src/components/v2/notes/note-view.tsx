@@ -32,14 +32,27 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function updatedLine(detail: NoteDetail): string | null {
-  const iso = detail.kind === "post" ? (detail.source.updatedAt ?? detail.item.date) : detail.item.date;
-  return iso ? `Updated ${formatNoteDate(iso)}` : null;
+export function noteDateLine(detail: NoteDetail): string | null {
+  const { item } = detail;
+  switch (detail.kind) {
+    case "note": {
+      return item.date ? `Published ${formatNoteDate(item.date)}` : null;
+    }
+    case "post": {
+      if (!item.date) return null;
+      const published = formatNoteDate(item.date);
+      const updated = detail.source.updatedAt ? formatNoteDate(detail.source.updatedAt) : "";
+      return updated && updated !== published ? `Published ${published} · Updated ${updated}` : `Published ${published}`;
+    }
+    default: {
+      return item.date ? `Updated ${formatNoteDate(item.date)}` : null;
+    }
+  }
 }
 
 export function NoteHeader({ detail }: { detail: NoteDetail }) {
   const { item } = detail;
-  const updated = updatedLine(detail);
+  const dateLine = noteDateLine(detail);
   return (
     <header className="v2-note-header">
       <h1>
@@ -50,10 +63,10 @@ export function NoteHeader({ detail }: { detail: NoteDetail }) {
         ) : null}
         {item.title}
       </h1>
-      {updated || detail.kind === "post" ? (
+      {dateLine || detail.kind === "post" ? (
         <p className="v2-note-date">
-          {updated}
-          {updated && detail.kind === "post" ? " · " : null}
+          {dateLine}
+          {dateLine && detail.kind === "post" ? " · " : null}
           {detail.kind === "post" ? `${detail.source.readingTimeMinutes} min read` : null}
         </p>
       ) : null}
