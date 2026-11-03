@@ -12,6 +12,7 @@ export const isSanityConfigured = Boolean(sanityConfig.projectId && sanityConfig
 export const sanityClient = isSanityConfigured
   ? createClient({
       ...sanityConfig,
-      token: process.env.SANITY_READ_TOKEN
+      token: process.env.SANITY_READ_TOKEN,
+      perspective: "published"
     })
   : null;
