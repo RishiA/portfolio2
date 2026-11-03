@@ -21,7 +21,7 @@ export const notesQuery = groq`*[_type == "note" && isPublished == true] | order
   isPublished
 }`;
 
-export const noteBySlugQuery = groq`*[_type == "note" && slug.current == $slug][0]{
+export const noteBySlugQuery = groq`*[_type == "note" && slug.current == $slug && isPublished == true][0]{
   "slug": slug.current,
   kind,
   title,
@@ -54,7 +54,7 @@ export const blogPostsQuery = groq`*[_type == "blogPost" && isPublished == true]
   isPublished
 }`;
 
-export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug][0]{
+export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug && isPublished == true][0]{
   "slug": slug.current,
   title,
   excerpt,
