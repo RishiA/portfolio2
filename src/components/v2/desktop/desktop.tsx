@@ -4,6 +4,8 @@
 import { useCallback, useEffect } from "react";
 import { WindowManagerProvider, useWindowManager } from "@/lib/v2/window-context";
 import { useSystemSettings } from "@/lib/v2/system-settings-context";
+import { wallpaperCssValue } from "@/lib/v2/settings/wallpapers";
+import { requestSettingsCategory } from "@/lib/v2/settings/navigation";
 import { WINDOWED_APPS } from "@/lib/v2/app-config";
 import { setUrl } from "@/lib/v2/set-url";
 import { getShellUrlForApp, SHELL_BASE_PATH } from "@/lib/v2/shell-routing";
@@ -21,7 +23,7 @@ interface DesktopProps {
 
 function DesktopContent({ initialNoteSlug }: { initialNoteSlug?: string }) {
   const { state, getWindow, openWindow, focusWindow, unminimizeWindow } = useWindowManager();
-  const { wallpaperUrl } = useSystemSettings();
+  const { wallpaper } = useSystemSettings();
 
   // Keep the URL in step with the focused window.
   useEffect(() => {
@@ -54,14 +56,19 @@ function DesktopContent({ initialNoteSlug }: { initialNoteSlug?: string }) {
     }
   }, [focusWindow, getWindow, openWindow, unminimizeWindow]);
 
+  const handleChangeWallpaper = useCallback(() => {
+    requestSettingsCategory("wallpaper");
+    handleOpenSettings();
+  }, [handleOpenSettings]);
+
   return (
     <div className="fixed inset-0" data-shell="desktop" data-testid="desktop">
       <ContextMenu>
         <ContextMenuTrigger asChild>
           <div
-            className="absolute inset-0 bg-cover bg-center [background-image:var(--v2-wallpaper)]"
-            data-desktop-wallpaper
-            style={wallpaperUrl ? { backgroundImage: `url(${JSON.stringify(wallpaperUrl)})` } : undefined}
+            className="absolute inset-0 bg-cover bg-center"
+            data-desktop-wallpaper={wallpaper.kind === "photo" ? "photo" : wallpaper.id}
+            style={{ backgroundImage: wallpaperCssValue(wallpaper) }}
           />
         </ContextMenuTrigger>
         <ContextMenuContent
@@ -69,7 +76,7 @@ function DesktopContent({ initialNoteSlug }: { initialNoteSlug?: string }) {
           className="min-w-0 w-max rounded-lg border-black/10 bg-white/95 p-0 py-1 text-xs shadow-2xl backdrop-blur-xl dark:border-white/10 dark:bg-zinc-800/95"
         >
           <ContextMenuItem
-            onSelect={handleOpenSettings}
+            onSelect={handleChangeWallpaper}
             className="rounded-none px-3 py-1.5 text-xs focus:bg-blue-500 focus:text-white can-hover:hover:bg-blue-500 can-hover:hover:text-white"
           >
             Change Wallpaper…

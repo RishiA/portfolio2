@@ -27,6 +27,10 @@
   --ring: 0 0% 3.9%;
   --radius: 0.5rem;
   --v2-wallpaper: linear-gradient(160deg, #f6d5b8 0%, #e9b7c0 38%, #a9b9e0 72%, #7fa6d6 100%);
+  --v2-wallpaper-dawn: var(--v2-wallpaper);
+  --v2-wallpaper-lagoon: linear-gradient(160deg, #bfe9e4 0%, #8fd0e0 40%, #7aa8e6 75%, #6f86d8 100%);
+  --v2-wallpaper-meadow: linear-gradient(160deg, #e6f0b8 0%, #b5e0a4 40%, #84cdb0 75%, #6dafc4 100%);
+  --v2-wallpaper-dusk: linear-gradient(160deg, #f4c9a8 0%, #e79aa6 38%, #b58bd0 72%, #7a78cf 100%);
 }
 
 .dark {
@@ -50,6 +54,9 @@
   --input: 0 0% 14.9%;
   --ring: 0 0% 83.1%;
   --v2-wallpaper: linear-gradient(160deg, #2b2438 0%, #3a2c4a 38%, #23364f 72%, #14202e 100%);
+  --v2-wallpaper-lagoon: linear-gradient(160deg, #123238 0%, #164552 40%, #1b3a64 75%, #1a2750 100%);
+  --v2-wallpaper-meadow: linear-gradient(160deg, #22301a 0%, #1f4a33 40%, #17463f 75%, #14323f 100%);
+  --v2-wallpaper-dusk: linear-gradient(160deg, #3a2420 0%, #4a2535 38%, #38284f 72%, #1e1f4a 100%);
 }
 
 @layer base {

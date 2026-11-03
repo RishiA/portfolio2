@@ -1,0 +1,25 @@
+"use client";
+// Adapted from github.com/alanagoyal/alanagoyal, Copyright (c) 2024 Alana Goyal, MIT License.
+
+import { useSystemSettings } from "@/lib/v2/system-settings-context";
+import { SettingsSwitch } from "../settings-switch";
+
+export function DesktopDockPanel() {
+  const { showDockIndicators, setShowDockIndicators } = useSystemSettings();
+
+  return (
+    <div data-setting-search-id="desktop-dock" className="mx-auto w-full max-w-2xl space-y-3 p-6">
+      <h2 className="text-sm font-semibold">Dock</h2>
+      <div className="rounded-xl bg-muted/60 text-sm">
+        <div data-setting-search-id="dock-indicators" className="flex min-h-11 items-center justify-between gap-4 px-4 py-2.5">
+          <span>Show indicators for open applications</span>
+          <SettingsSwitch
+            aria-label="Show indicators for open applications"
+            checked={showDockIndicators}
+            onCheckedChange={setShowDockIndicators}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}

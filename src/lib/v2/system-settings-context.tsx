@@ -2,6 +2,7 @@
 // Adapted from github.com/alanagoyal/alanagoyal, Copyright (c) 2024 Alana Goyal, MIT License.
 
 import React, { createContext, useContext, useState, useCallback } from "react";
+import { parseWallpaper, serializeWallpaper, type Wallpaper } from "./settings/wallpapers";
 import { DOCK_SHOW_OPEN_INDICATORS_STORAGE_KEY, parseShowDockIndicators } from "./dock-preferences";
 
 export type ClockStyle = "digital" | "analog";
@@ -23,9 +24,9 @@ interface SystemSettingsContextValue {
   setClockShowSeconds: (show: boolean) => void;
   showDockIndicators: boolean;
   setShowDockIndicators: (show: boolean) => void;
-  /** Custom wallpaper image. When null the default gradient is shown. */
-  wallpaperUrl: string | null;
-  setWallpaperUrl: (url: string | null) => void;
+  /** A gradient id or a photo URL. Defaults to the default gradient. */
+  wallpaper: Wallpaper;
+  setWallpaper: (wallpaper: Wallpaper) => void;
 }
 
 const SystemSettingsContext = createContext<SystemSettingsContextValue | null>(null);
@@ -37,7 +38,7 @@ const CLOCK_STYLE_KEY = "menu-bar-clock-style";
 const CLOCK_SHOW_AM_PM_KEY = "menu-bar-clock-show-am-pm";
 const CLOCK_FLASH_SEPARATORS_KEY = "menu-bar-clock-flash-separators";
 const CLOCK_SHOW_SECONDS_KEY = "menu-bar-clock-show-seconds";
-const WALLPAPER_URL_KEY = "desktop-custom-wallpaper";
+const WALLPAPER_KEY = "desktop-custom-wallpaper";
 
 function readStorage(key: string): string | null {
   if (typeof window === "undefined") return null;
@@ -82,8 +83,6 @@ const parseBooleanDefaultFalse = (stored: string | null) => stored === "true";
 const serializeBoolean = (value: boolean) => String(value);
 const parseClockStyle = (stored: string | null): ClockStyle => (stored === "analog" ? "analog" : "digital");
 const serializeString = (value: string) => value;
-const parseWallpaperUrl = (stored: string | null) => stored || null;
-const serializeNullableString = (value: string | null) => value;
 
 export function SystemSettingsProvider({ children }: { children: React.ReactNode }) {
   const [menuBarBackground, setMenuBarBackground] = usePersistedSetting(
@@ -122,11 +121,7 @@ export function SystemSettingsProvider({ children }: { children: React.ReactNode
     parseShowDockIndicators,
     serializeBoolean
   );
-  const [wallpaperUrl, setWallpaperUrl] = usePersistedSetting(
-    WALLPAPER_URL_KEY,
-    parseWallpaperUrl,
-    serializeNullableString
-  );
+  const [wallpaper, setWallpaper] = usePersistedSetting(WALLPAPER_KEY, parseWallpaper, serializeWallpaper);
 
   return (
     <SystemSettingsContext.Provider
@@ -147,8 +142,8 @@ export function SystemSettingsProvider({ children }: { children: React.ReactNode
         setClockShowSeconds,
         showDockIndicators,
         setShowDockIndicators,
-        wallpaperUrl,
-        setWallpaperUrl
+        wallpaper,
+        setWallpaper
       }}
     >
       {children}
