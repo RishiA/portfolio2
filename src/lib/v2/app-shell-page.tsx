@@ -7,6 +7,7 @@ import { SystemSettingsProvider } from "@/lib/v2/system-settings-context";
 import { SHELL_DEFAULT_APP_ID } from "@/lib/v2/shell-routing";
 import { useShellIsMobile } from "@/lib/v2/use-shell-is-mobile";
 import { ShellBootProvider, type ShellBoot } from "@/lib/v2/shell-boot-context";
+import { AudioProvider } from "@/lib/v2/music/audio-context";
 
 interface AppShellPageProps extends Pick<ShellBoot, "initialNoteSlug" | "initialNotes" | "initialNote"> {
   appId?: string;
@@ -21,11 +22,13 @@ export function AppShellPage({ appId, initialNoteSlug, initialNotes, initialNote
   return (
     <ShellBootProvider value={{ initialNoteSlug, initialNotes, initialNote }}>
       <SystemSettingsProvider>
-        {isMobile ? (
-          <MobileShell initialApp={appId || SHELL_DEFAULT_APP_ID} />
-        ) : (
-          <Desktop initialAppId={appId} initialNoteSlug={initialNoteSlug} />
-        )}
+        <AudioProvider>
+          {isMobile ? (
+            <MobileShell initialApp={appId || SHELL_DEFAULT_APP_ID} />
+          ) : (
+            <Desktop initialAppId={appId} initialNoteSlug={initialNoteSlug} />
+          )}
+        </AudioProvider>
       </SystemSettingsProvider>
     </ShellBootProvider>
   );

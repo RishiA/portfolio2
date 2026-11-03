@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "data": [
+    {
+      "id": "playlist-one",
+      "name": "Road Trip",
+      "emoji": "🚗",
+      "description": "Songs for the highway",
+      "coverArt": "https://music-fixtures.test/art-a.png",
+      "tracks": [
+        {
+          "id": "101",
+          "name": "Morning Static",
+          "artist": "The Placeholders",
+          "album": "Test Card",
+          "albumArt": "https://music-fixtures.test/art-a.png",
+          "previewUrl": "https://music-fixtures.test/silence.wav",
+          "duration": 201
+        },
+        {
+          "id": "102",
+          "name": "Soft Launch",
+          "artist": "The Placeholders",
+          "album": "Test Card",
+          "albumArt": "https://music-fixtures.test/art-a.png",
+          "previewUrl": "https://music-fixtures.test/silence.wav",
+          "duration": 187
+        },
+        {
+          "id": "103",
+          "name": "Blue Hour",
+          "artist": "Sample Rate",
+          "album": "Fixtures",
+          "albumArt": "https://music-fixtures.test/art-b.png",
+          "previewUrl": "https://music-fixtures.test/silence.wav",
+          "duration": 244
+        }
+      ]
+    },
+    {
+      "id": "playlist-two",
+      "name": "Late Night",
+      "emoji": "🌙",
+      "coverArt": "https://music-fixtures.test/art-c.png",
+      "tracks": [
+        {
+          "id": "104",
+          "name": "Green Room",
+          "artist": "Sample Rate",
+          "album": "Fixtures",
+          "albumArt": "https://music-fixtures.test/art-c.png",
+          "previewUrl": "https://music-fixtures.test/silence.wav",
+          "duration": 156
+        },
+        {
+          "id": "105",
+          "name": "No Preview Available",
+          "artist": "Mock Ensemble",
+          "album": "Silent Film",
+          "albumArt": "https://music-fixtures.test/art-d.png",
+          "previewUrl": null,
+          "duration": 199
+        }
+      ]
+    }
+  ]
+}

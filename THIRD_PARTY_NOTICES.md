@@ -78,6 +78,31 @@ site's content instead of Supabase.
 - `src/lib/v2/photos/wheel-navigation.ts`
 - `tailwind.config.ts`
 
+### Adapted files: Music app
+
+The Music app is adapted from `components/apps/music` and `lib/music` in the same repository. Her playlists, cover art and preview links are not included. Playlists come from Sanity, and each song's cover art and 30-second preview are looked up from Apple's public iTunes lookup API.
+
+- `src/components/v2/apps/music/app.tsx`
+- `src/components/v2/apps/music/content-views/albums-view.tsx`
+- `src/components/v2/apps/music/content-views/artists-view.tsx`
+- `src/components/v2/apps/music/content-views/home-view.tsx`
+- `src/components/v2/apps/music/content-views/playlist-view.tsx`
+- `src/components/v2/apps/music/content-views/songs-view.tsx`
+- `src/components/v2/apps/music/nav.tsx`
+- `src/components/v2/apps/music/now-playing-bar.tsx`
+- `src/components/v2/apps/music/scroll-area.tsx`
+- `src/components/v2/apps/music/sidebar.tsx`
+- `src/components/v2/apps/music/slider.tsx`
+- `src/components/v2/apps/music/track-favorite-button.tsx`
+- `src/lib/v2/music/audio-context.tsx`
+- `src/lib/v2/music/favorites.ts`
+- `src/lib/v2/music/library.ts`
+- `src/lib/v2/music/recently-played.ts`
+- `src/lib/v2/music/types.ts`
+- `src/lib/v2/music/use-music-library.ts`
+- `src/lib/v2/music/utils.ts`
+- `src/lib/v2/music/view-persistence.ts`
+
 ### License
 
 MIT License
