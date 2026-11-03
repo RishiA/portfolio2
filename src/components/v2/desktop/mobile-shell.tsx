@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { APP_SHELL_URL_CHANGE_EVENT, setUrl } from "@/lib/v2/set-url";
 import { getShellAppIdForContext, parseShellLocation, SHELL_DEFAULT_APP_ID } from "@/lib/v2/shell-routing";
 import { getAppById } from "@/lib/v2/app-config";
-import { AppPlaceholder } from "./app-placeholder";
+import { AppBody } from "@/components/v2/apps/registry";
 
 interface MobileShellProps {
   initialApp?: string;
@@ -47,7 +47,7 @@ export function MobileShell({ initialApp }: MobileShellProps) {
 
   return (
     <div className="h-dvh flex flex-col bg-background">
-      {app && <AppPlaceholder key={app.id} name={app.name} isMobile />}
+      {app && <AppBody key={app.id} appId={app.id} isMobile />}
     </div>
   );
 }

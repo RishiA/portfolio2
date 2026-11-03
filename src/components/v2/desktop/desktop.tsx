@@ -11,7 +11,7 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } 
 import { MenuBar } from "./menu-bar";
 import { Dock } from "./dock";
 import { Window } from "./window";
-import { AppPlaceholder } from "./app-placeholder";
+import { AppBody } from "@/components/v2/apps/registry";
 
 interface DesktopProps {
   initialAppId?: string;
@@ -79,7 +79,7 @@ function DesktopContent({ initialNoteSlug }: { initialNoteSlug?: string }) {
 
       {WINDOWED_APPS.map((app) => (
         <Window key={app.id} appId={app.id}>
-          <AppPlaceholder name={app.name} />
+          <AppBody appId={app.id} />
         </Window>
       ))}
 
