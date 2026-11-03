@@ -17,6 +17,8 @@ export const notesQuery = groq`*[_type == "note" && isPublished == true] | order
     favicon,
     publishedTime
   },
+  emoji,
+  pinned,
   publishedAt,
   isPublished
 }`;
@@ -38,6 +40,8 @@ export const noteBySlugQuery = groq`*[_type == "note" && slug.current == $slug][
     favicon,
     publishedTime
   },
+  emoji,
+  pinned,
   publishedAt,
   isPublished
 }`;

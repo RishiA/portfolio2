@@ -31,6 +31,8 @@ export const noteType = defineType({
     defineField({ name: "sourceUrl", title: "Source URL", type: "url" }),
     defineField({ name: "linkPreview", title: "Link Preview", type: "reference", to: [{ type: "linkPreview" }] }),
     defineField({ name: "tags", title: "Tags", type: "array", of: [{ type: "reference", to: [{ type: "tag" }] }] }),
+    defineField({ name: "emoji", title: "Emoji", type: "string" }),
+    defineField({ name: "pinned", title: "Pinned", type: "boolean", initialValue: false }),
     defineField({ name: "publishedAt", title: "Published At", type: "datetime", validation: (rule) => rule.required() }),
     defineField({ name: "isPublished", title: "Published", type: "boolean", initialValue: false })
   ]

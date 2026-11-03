@@ -68,6 +68,8 @@ const noteSchema = z.object({
   sourceUrl: z.string().url().nullish().transform((v) => v ?? undefined),
   tags: nullishArray(z.object({ title: z.string(), slug: z.string() })),
   linkPreview: linkPreviewSchema.nullish().transform((v) => v ?? undefined),
+  emoji: z.string().nullish().transform((v) => v ?? undefined),
+  pinned: z.boolean().nullish().transform((v) => v ?? false),
   publishedAt: z.string(),
   isPublished: z.boolean().default(false)
 });
@@ -108,6 +110,8 @@ export const mapNote = (input: unknown): Note => {
     sourceUrl: parsed.sourceUrl,
     linkPreview: parsed.linkPreview,
     tags: normalizeTags(parsed.tags),
+    emoji: parsed.emoji,
+    pinned: parsed.pinned,
     publishedAt: parsed.publishedAt,
     isPublished: parsed.isPublished
   };
