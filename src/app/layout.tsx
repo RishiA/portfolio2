@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Crimson_Pro, Manrope, Shadows_Into_Light } from "next/font/google";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/lib/theme/theme-provider";
-import "@/app/globals.css";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 const crimsonPro = Crimson_Pro({
@@ -39,12 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <html lang="en" suppressHydrationWarning>
       <body className={`${crimsonPro.variable} ${manrope.variable} ${shadowsIntoLight.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <div className="site-shell">
-            <a href="#main-content" className="skip-link">Skip to main content</a>
-            <SiteHeader />
-            <main id="main-content">{children}</main>
-            <SiteFooter />
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>
