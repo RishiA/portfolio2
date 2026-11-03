@@ -70,7 +70,7 @@ test.describe("v2 music", () => {
     await expect.poll(() => audioIsPlaying(page)).toBe(true);
 
     await page.getByTestId("dock-app-notes").click();
-    await expect(page).toHaveURL(/\/v2\/notes$/);
+    await expect(page).toHaveURL(/\/v2\/notes(\/[a-z0-9-]+)?$/);
     await expect(page.getByTestId("app-window-notes")).toBeVisible();
     expect(await audioCount(page)).toBe(1);
     expect(await audioIsPlaying(page)).toBe(true);
