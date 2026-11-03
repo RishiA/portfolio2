@@ -7,11 +7,25 @@ https://github.com/alanagoyal/alanagoyal under the MIT License. Each adapted fil
 `// Adapted from github.com/alanagoyal/alanagoyal, Copyright (c) 2024 Alana Goyal, MIT License.`
 
 The code was stripped to the desktop, windows, Dock, menu bar and mobile shell, and changed to run on this
-site (Next 15, React 19, `/v2` routes, five apps plus Trash, original icons).
+site (Next 15, React 19, `/v2` routes, five apps plus Trash, original icons). The Notes app (`src/components/v2/apps/notes`) follows her
+Notes sidebar, reading pane, mobile list and note screens and note typography, made read-only and fed by this
+site's content instead of Supabase.
 
 ### Adapted files
 
 - `src/app/v2/tailwind.css`
+- `src/components/v2/apps/notes/collapsible-section.tsx`
+- `src/components/v2/apps/notes/desktop-presenter.tsx`
+- `src/components/v2/apps/notes/index.tsx`
+- `src/components/v2/apps/notes/mobile-presenter.tsx`
+- `src/components/v2/apps/notes/nav.tsx`
+- `src/components/v2/apps/notes/note-header.tsx`
+- `src/components/v2/apps/notes/note-item.tsx`
+- `src/components/v2/apps/notes/note-view.tsx`
+- `src/components/v2/apps/notes/notes.css`
+- `src/components/v2/apps/notes/scroll-area.tsx`
+- `src/components/v2/apps/notes/search-bar.tsx`
+- `src/components/v2/apps/notes/sidebar.tsx`
 - `src/components/v2/desktop/about-dialog.tsx`
 - `src/components/v2/desktop/app-menu.tsx`
 - `src/components/v2/desktop/app-placeholder.tsx`
@@ -32,6 +46,8 @@ site (Next 15, React 19, `/v2` routes, five apps plus Trash, original icons).
 - `src/lib/v2/dock-preferences.ts`
 - `src/lib/v2/dock-thumbnails.ts`
 - `src/lib/v2/menu-bar-clock.ts`
+- `src/lib/v2/notes/groups.ts`
+- `src/lib/v2/notes/search.ts`
 - `src/lib/v2/set-url.ts`
 - `src/lib/v2/shell-routing.ts`
 - `src/lib/v2/system-settings-context.tsx`
