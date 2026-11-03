@@ -10,11 +10,20 @@ const fetchPhotos = async (query: string): Promise<Photo[]> => {
   }
   try {
     const data = await sanityClient.fetch<unknown[]>(query);
-    return (data ?? []).map(mapPhoto);
+    return (data ?? []).flatMap(mapPhotoOrSkip);
   } catch {
     return [];
   }
 };
+
+// A photo with a missing required field is left out, so one bad document does not empty the library.
+function mapPhotoOrSkip(raw: unknown): Photo[] {
+  try {
+    return [mapPhoto(raw)];
+  } catch {
+    return [];
+  }
+}
 
 /** Photos newest first. Returns an empty list when Sanity is unreachable. */
 export const getPhotos = cache(() => fetchPhotos(photosQuery));
