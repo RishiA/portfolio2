@@ -26,6 +26,14 @@ export function rememberSelectedSlug(slug: string): void {
   lastSelectedSlug = slug;
 }
 
+export const NOTE_SELECT_EVENT = "v2-notes-select";
+
+/** Asks the Notes app to show a note. Works whether or not the Notes window is open yet. */
+export function requestNoteSelection(slug: string): void {
+  lastSelectedSlug = slug;
+  window.dispatchEvent(new CustomEvent<string>(NOTE_SELECT_EVENT, { detail: slug }));
+}
+
 export function resetNotesCache(): void {
   cachedList = null;
   cachedDetails.clear();
